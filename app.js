@@ -59,7 +59,7 @@ app.post("/webhook", function (req, res) {
         req.body.entry.forEach(function(entry) {
             // Iterara todos lo eventos capturados
             entry.messaging.forEach(function(event) {
-                if (event.postback) {
+                if (event.message) {
                   process_event(event);
                 }
             });
