@@ -19,7 +19,7 @@ app.get("/", function (req, res) {
 // Usados para la verificacion
 app.get("/webhook", function (req, res) {
     // Verificar la coincidendia del token
-    if (req.query["hub.verify_token"] === env.VERIFICATION_TOKEN) {
+    if (req.query["hub.verify_token"] === process.env.VERIFICATION_TOKEN) {
         // Mensaje de exito y envio del token requerido
         console.log("webhook verificado!");
         res.status(200).send(req.query["hub.challenge"]);
@@ -100,7 +100,7 @@ function enviar_texto(senderID, response){
     // Enviar el requisito HTTP a la plataforma de messenger
     request({
         "uri": "https://graph.facebook.com/v2.6/me/messages",
-        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
         "method": "POST",
         "json": request_body
     }, (err, res, body) => {
